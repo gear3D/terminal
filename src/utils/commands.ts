@@ -6,12 +6,6 @@ import { todoManager } from "./todo";
 
 const hostname = window.location.hostname;
 
-function getRandomElement<T>(arr: T[]): T | undefined {
-    if (arr.length === 0) return undefined; // handle empty arrays
-    const randomIndex = Math.floor(Math.random() * arr.length);
-    return arr[randomIndex];
-}
-
 const themesArray = ["3024day","3024night","aci","aco","adventuretime","afterglow","alienblood","argonaut","arthur","atom","aura","ayudark","ayulight","ayumirage","azu","belafonteday","belafontenight","bim","birdsofparadise","blazer","blulocolight","blulocozshlight","borland","broadcast","brogrammer","c64","cai","chalk","chalkboard","chameleon","ciapre","cloneofubuntu","clrs","cobalt2","cobaltneon","colorcli","crayonponyfish","darkpastel","darkside","dehydration","desert","dimmedmonokai","dissonance","dracula","earthsong","elemental","elementary","elic","elio","espresso","espressolibre","fairyfloss","fairyflossdark","fishtank","flat","flatland","flatremix","foxnightly","freya","frontenddelight","frontendfunforrest","frontendgalaxy","geohot","github","gogh","gooey","googledark","googlelight","gotham","grape","grass","gruvbox","gruvboxdark","hardcore","harper","hemisudark","hemisulight","highway","hipstergreen","homebrew","horizonbright","horizondark","hurtado","hybrid","ibm3270(highcontrast)","ibm3270","icgreenppl","icorangeppl","idletoes","irblack","jackiebrown","japanesque","jellybeans","jup","kibble","kokuban","laserwave","laterthisevening","lavandula","liquidcarbon","liquidcarbontransparent","lunariadark","lunariaeclipse","lunarialight","maia","manpage","mar","material","mathias","medallion","misterioso","miu","molokai","monalisa","mono-amber","mono-cyan","mono-green","mono-red","mono-white","mono-yellow","monokaidark","monokaipro","monokaiproristretto","monokaisoda","morada","n0tch2k","neon-night","neopolitan","nep","neutron","nightlionv1","nightlionv2","nightowl","nighty","nord","nordlight","novel","obsidian","ocean","oceandark","oceanicnext","ollie","omni","onedark","onehalfblack","onelight","palenight","pali","panda","papercolordark","papercolorlight","paraisodark","paulmillr","pencildark","pencillight","peppermint","pixiefloss","pnevma","powershell","pro","purplepeopleeater","redalert","redsands","relaxed","rippedcasts","royal","sat","seafoampastel","seashells","seti","shaman","shel","slate","smyck","snazzy","softserver","solarizeddarcula","solarizeddark","solarizeddarkhighercontrast","solarizedlight","sonokai","spacedust","spacegray","spacegrayeighties","spacegrayeightiesdull","spring","square","srcery","summer-pop","sundried","sweet-eliverlara","sweetterminal","symphonic","synthwave","teerb","tender","terminalbasic","terminixdark","thayerbright","tin","tokyonight","tokyonightlight","tokyonightstorm","tomorrow","tomorrownight","tomorrownightblue","tomorrownightbright","tomorrownighteighties","toychest","treehouse","twilight","ura","urple","vag","vaughn","vibrantink","vscodedark+","vscodelight+","warmneon","wez","wildcherry","wombat","wryan","wzoreck","zenburn"]
 
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
@@ -63,7 +57,8 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       theme set gruvboxdark
     `;
     if (args.length === 0) {
-      const randomTheme = getRandomElement(themesArray);
+      const randomIndex = Math.floor(Math.random() * themesArray.length);
+      const randomTheme = themesArray[randomIndex];
       theme.set(randomTheme);
       return usage;
     }
