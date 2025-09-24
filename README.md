@@ -1,3 +1,10 @@
+TODO
+*  update README.md
+*  update description for repo
+*  change banner - ANSI Shadow looks good
+*  add actions to open pages
+*  look for a theme too
+
 # [M4TT72 | Terminal](https://term.m4tt72.com)
 
 A terminal style website
