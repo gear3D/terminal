@@ -79,8 +79,9 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
         lastIndex = randomIndex;
         const randomTheme = themesArray[randomIndex];
 
-        themeStore.set(randomTheme);
-
+        const t = themes.find((t) => t.name.toLowerCase() === randomTheme);
+        theme.set(t);
+        
         return `Random theme selected: ${randomTheme}`;
       }
 
