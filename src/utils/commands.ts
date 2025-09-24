@@ -61,7 +61,7 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       const randomTheme = themesArray[randomIndex];
       theme.set(randomTheme);
       return usage;
-      return ${randomTheme}${randomIndex};
+      return `${randomTheme} ${randomIndex}`;
     }
 
     switch (args[0]) {
