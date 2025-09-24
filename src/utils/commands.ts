@@ -6,15 +6,21 @@ import { todoManager } from "./todo";
 
 const hostname = window.location.hostname;
 
+function getRandomElement<T>(arr: T[]): T | undefined {
+    if (arr.length === 0) return undefined; // handle empty arrays
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+}
+
+const themesArray = ["3024day","3024night","aci","aco","adventuretime","afterglow","alienblood","argonaut","arthur","atom","aura","ayudark","ayulight","ayumirage","azu","belafonteday","belafontenight","bim","birdsofparadise","blazer","blulocolight","blulocozshlight","borland","broadcast","brogrammer","c64","cai","chalk","chalkboard","chameleon","ciapre","cloneofubuntu","clrs","cobalt2","cobaltneon","colorcli","crayonponyfish","darkpastel","darkside","dehydration","desert","dimmedmonokai","dissonance","dracula","earthsong","elemental","elementary","elic","elio","espresso","espressolibre","fairyfloss","fairyflossdark","fishtank","flat","flatland","flatremix","foxnightly","freya","frontenddelight","frontendfunforrest","frontendgalaxy","geohot","github","gogh","gooey","googledark","googlelight","gotham","grape","grass","gruvbox","gruvboxdark","hardcore","harper","hemisudark","hemisulight","highway","hipstergreen","homebrew","horizonbright","horizondark","hurtado","hybrid","ibm3270(highcontrast)","ibm3270","icgreenppl","icorangeppl","idletoes","irblack","jackiebrown","japanesque","jellybeans","jup","kibble","kokuban","laserwave","laterthisevening","lavandula","liquidcarbon","liquidcarbontransparent","lunariadark","lunariaeclipse","lunarialight","maia","manpage","mar","material","mathias","medallion","misterioso","miu","molokai","monalisa","mono-amber","mono-cyan","mono-green","mono-red","mono-white","mono-yellow","monokaidark","monokaipro","monokaiproristretto","monokaisoda","morada","n0tch2k","neon-night","neopolitan","nep","neutron","nightlionv1","nightlionv2","nightowl","nighty","nord","nordlight","novel","obsidian","ocean","oceandark","oceanicnext","ollie","omni","onedark","onehalfblack","onelight","palenight","pali","panda","papercolordark","papercolorlight","paraisodark","paulmillr","pencildark","pencillight","peppermint","pixiefloss","pnevma","powershell","pro","purplepeopleeater","redalert","redsands","relaxed","rippedcasts","royal","sat","seafoampastel","seashells","seti","shaman","shel","slate","smyck","snazzy","softserver","solarizeddarcula","solarizeddark","solarizeddarkhighercontrast","solarizedlight","sonokai","spacedust","spacegray","spacegrayeighties","spacegrayeightiesdull","spring","square","srcery","summer-pop","sundried","sweet-eliverlara","sweetterminal","symphonic","synthwave","teerb","tender","terminalbasic","terminixdark","thayerbright","tin","tokyonight","tokyonightlight","tokyonightstorm","tomorrow","tomorrownight","tomorrownightblue","tomorrownightbright","tomorrownighteighties","toychest","treehouse","twilight","ura","urple","vag","vaughn","vibrantink","vscodedark+","vscodelight+","warmneon","wez","wildcherry","wombat","wryan","wzoreck","zenburn"]
+
 export const commands: Record<string, (args: string[]) => Promise<string> | string> = {
   help: () => {
     const categories = {
       System: ["help", "clear", "date", "exit"],
       Productivity: ["todo", "weather"],
       Customization: ["theme", "banner"],
-      Network: ["curl", "hostname", "whoami"],
-      Contact: ["email", "repo", "donate"],
-      Fun: ["echo", "sudo", "vi", "vim", "emacs"],
+      Links: ["tuckshop", "planner", "onedrive", "sharepoint", "network"],
     };
 
     let output = "Available commands:\n\n";
@@ -30,17 +36,21 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
 
     return output;
   },
-  hostname: () => hostname,
-  whoami: () => "guest",
-  date: () => new Date().toLocaleString(),
-  vi: () => `why use vi? try 'emacs'`,
-  vim: () => `why use vim? try 'emacs'`,
-  emacs: () => `why use emacs? try 'vim'`,
-  echo: (args: string[]) => args.join(" "),
-  sudo: (args: string[]) => {
-    window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 
-    return `Permission denied: unable to run the command '${args[0]}' as root.`;
+  tuckshop: (args: string[]) => {
+    window.open("https://tuckshop.victorycollege.com/wp/Profile/Accounts");
+  },
+  planner: (args: string[]) => {
+    window.open("https://planner.cloud.microsoft/webui/myplans/recent?tid=316b7750-5b50-462b-b596-61016ec97f10");
+  },
+  onedrive: (args: string[]) => {
+    window.open("https://vcqld-my.sharepoint.com/?login_hint=c%2Ewright%40victorycollege%2Ecom&source=waffle");
+  },
+  sharepoint: (args: string[]) => {
+    window.open("https://vcqld.sharepoint.com/_layouts/15/sharepoint.aspx?login_hint=c.wright%40victorycollege.com");
+  },
+  network: (args: string[]) => {
+    window.open("https://common.cloud.hpe.com/");
   },
   theme: (args: string[]) => {
     const usage = `Usage: theme [args].
@@ -53,6 +63,8 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       theme set gruvboxdark
     `;
     if (args.length === 0) {
+      const randomTheme = getRandomElement(themesArray);
+      theme.set(randomTheme);
       return usage;
     }
 
@@ -86,25 +98,10 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       }
     }
   },
-  repo: () => {
-    window.open(packageJson.repository.url, "_blank");
-
-    return "Opening repository...";
-  },
   clear: () => {
     history.set([]);
 
     return "";
-  },
-  email: () => {
-    window.open(`mailto:${packageJson.author.email}`);
-
-    return `Opening mailto:${packageJson.author.email}...`;
-  },
-  donate: () => {
-    window.open(packageJson.funding.url, "_blank");
-
-    return "Opening donation url...";
   },
   weather: async (args: string[]) => {
     const city = args.join("+");
@@ -137,12 +134,12 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     }
   },
   banner: () => `
-███╗   ███╗██╗  ██╗████████╗████████╗███████╗██████╗
-████╗ ████║██║  ██║╚══██╔══╝╚══██╔══╝╚════██║╚════██╗
-██╔████╔██║███████║   ██║      ██║       ██╔╝ █████╔╝
-██║╚██╔╝██║╚════██║   ██║      ██║      ██╔╝ ██╔═══╝
-██║ ╚═╝ ██║     ██║   ██║      ██║      ██║  ███████╗
-╚═╝     ╚═╝     ╚═╝   ╚═╝      ╚═╝      ╚═╝  ╚══════╝ v${packageJson.version}
+ ██████╗ ███████╗ █████╗ ██████╗ ██████╗ ██████╗ 
+██╔════╝ ██╔════╝██╔══██╗██╔══██╗╚════██╗██╔══██╗
+██║  ███╗█████╗  ███████║██████╔╝ █████╔╝██║  ██║
+██║   ██║██╔══╝  ██╔══██║██╔══██╗ ╚═══██╗██║  ██║
+╚██████╔╝███████╗██║  ██║██║  ██║██████╔╝██████╔╝
+ ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═════╝   v${packageJson.version}
 
 Type 'help' to see list of available commands.
 `,
