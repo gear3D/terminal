@@ -60,7 +60,7 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       const randomIndex = Math.floor(Math.random() * themesArray.length);
       const randomTheme = themesArray[randomIndex];
       theme.set(randomTheme);
-      return usage
+      return usage;
       return ${randomTheme}${randomIndex};
     }
 
