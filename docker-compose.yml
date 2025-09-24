@@ -5,7 +5,7 @@ services:
     container_name: terminal
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 4570:3000
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 200s
