@@ -2,6 +2,7 @@ import packageJson from "../../package.json";
 import themes from "../../themes.json";
 import { history } from "../stores/history";
 import { theme } from "../stores/theme";
+import { theme as themeStore } from "../stores/theme";
 import { todoManager } from "./todo";
 
 const hostname = window.location.hostname;
@@ -77,7 +78,8 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
 
         lastIndex = randomIndex;
         const randomTheme = themesArray[randomIndex];
-        theme.set(randomTheme);
+
+        themeStore.set(randomTheme);
 
         return `Random theme selected: ${randomTheme}`;
       }
