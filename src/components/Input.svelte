@@ -10,6 +10,11 @@
 
   let input: HTMLInputElement;
 
+  // this is to handle cycling through the list of commands when you press tab multiple times
+  let matches: string[] = [];
+  let matchIndex = 0;
+  let lastInput = '';
+
   onMount(() => {
     input.focus();
 
@@ -69,6 +74,27 @@
       }
       event.preventDefault();
     } else if (event.key === 'Tab') {
+      // the new tab handler
+      event.preventDefault();
+
+      const availableCommands = Object.keys(commands);
+
+      if (command !== lastInput) {
+      // New input → build matches
+      matches = availableCommands.filter((cmd) => cmd.startsWith(command));
+      matchIndex = 0;
+      lastInput = command;
+    } else {
+      // Same input → cycle to next match
+      matchIndex = (matchIndex + 1) % matches.length;
+    }
+
+    if (matches.length > 0) {
+      command = matches[matchIndex];
+    }
+  }
+      /* else if (event.key === 'Tab') {
+      // the old tab handler
       event.preventDefault();
 
       const autoCompleteCommand = Object.keys(commands).find((cmd) =>
@@ -78,11 +104,12 @@
       if (autoCompleteCommand) {
         command = autoCompleteCommand;
       }
-    } else if (event.ctrlKey && event.key === 'l') {
-      event.preventDefault();
+    } */ /*else if (event.ctrlKey && event.key === 'l') {
+        // to remove the clearing the history with ctrl + L
+        event.preventDefault();
 
       $history = [];
-    }
+    } */
   };
 </script>
 

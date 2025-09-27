@@ -142,7 +142,9 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
       return `curl: could not fetch URL ${url}. Details: ${error}`;
     }
   },
-  banner: () => `
+  banner: () => {
+    if (history = "gear3d.duckdns.org") {
+    `
  ██████╗ ███████╗ █████╗ ██████╗ ██████╗ ██████╗ 
 ██╔════╝ ██╔════╝██╔══██╗██╔══██╗╚════██╗██╔══██╗
 ██║  ███╗█████╗  ███████║██████╔╝ █████╔╝██║  ██║
@@ -151,7 +153,17 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═════╝   v${packageJson.version}
 
 Type 'help' to see list of available commands.
-`,
+`} else `
+██╗      ██████╗  ██████╗ █████╗ ██╗     
+██║     ██╔═══██╗██╔════╝██╔══██╗██║     
+██║     ██║   ██║██║     ███████║██║     
+██║     ██║   ██║██║     ██╔══██║██║     
+███████╗╚██████╔╝╚██████╗██║  ██║███████╗
+╚══════╝ ╚═════╝  ╚═════╝╚═╝  ╚═╝╚══════╝   v${packageJson.version}
+
+`
+  }
+,
   todo: (args: string[]) => {
     const usage = `Usage: todo [command] [args]
 
