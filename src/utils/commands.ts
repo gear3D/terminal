@@ -143,8 +143,8 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
     }
   },
   banner: () => {
-    if (history = "gear3d.duckdns.org") {
-    `
+    if (hostname === "gear3d.duckdns.org") {
+    return `
  ██████╗ ███████╗ █████╗ ██████╗ ██████╗ ██████╗ 
 ██╔════╝ ██╔════╝██╔══██╗██╔══██╗╚════██╗██╔══██╗
 ██║  ███╗█████╗  ███████║██████╔╝ █████╔╝██║  ██║
@@ -153,7 +153,8 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚═════╝   v${packageJson.version}
 
 Type 'help' to see list of available commands.
-`} else `
+`} else {
+  return `
 ██╗      ██████╗  ██████╗ █████╗ ██╗     
 ██║     ██╔═══██╗██╔════╝██╔══██╗██║     
 ██║     ██║   ██║██║     ███████║██║     
@@ -163,7 +164,7 @@ Type 'help' to see list of available commands.
 
 `
   }
-,
+},
   todo: (args: string[]) => {
     const usage = `Usage: todo [command] [args]
 
