@@ -48,6 +48,12 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   network: (args: string[]) => {
     window.open("https://common.cloud.hpe.com/");
   },
+  glpi: (args: string[]) => {
+    window.open("https://helpdesk.victorycollege.com/front/helpdesk.public.php");
+  },
+  vici: (args: string[]) => {
+    window.open("https://vici.victorycollege.com/");
+  },
   theme: (args: string[]) => {
     const usage = `Usage: theme [args].
     [args]:
