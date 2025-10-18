@@ -55,6 +55,15 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   vici: (args: string[]) => {
     window.open("https://vici.victorycollege.com/");
   },
+  notion: (args: string[]) => {
+    window.open("https://www.notion.so/");
+  },
+  spotify: (args: string[]) => {
+    window.open("https://open.spotify.com/");
+  },
+  bom: (args: string[]) => {
+    window.open("https://www.bom.gov.au/products/IDR083.loop.shtml");
+  },
   badcommands: (args: string[]) => {
   if (args[0] === "clear") {
     $invalidHistory = [];
