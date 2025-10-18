@@ -4,6 +4,7 @@ import { history } from "../stores/history";
 import { theme } from "../stores/theme";
 import { theme as themeStore } from "../stores/theme";
 import { todoManager } from "./todo";
+import { invalidHistory } from '../stores/invalidHistory';
 
 const hostname = window.location.hostname;
 
@@ -53,6 +54,18 @@ export const commands: Record<string, (args: string[]) => Promise<string> | stri
   },
   vici: (args: string[]) => {
     window.open("https://vici.victorycollege.com/");
+  },
+  badcommands: (args: string[]) => {
+  if (args[0] === "clear") {
+    $invalidHistory = [];
+    return "Invalid command history cleared.";
+  }
+
+  if ($invalidHistory.length === 0) {
+    return "No invalid commands recorded.";
+  }
+
+  return `Invalid commands:\n${$invalidHistory.join("\n")}`;
   },
   theme: (args: string[]) => {
     const usage = `Usage: theme [args].

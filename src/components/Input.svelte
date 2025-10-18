@@ -4,6 +4,7 @@
   import { theme } from '../stores/theme';
   import { commands } from '../utils/commands';
   import { track } from '../utils/tracking';
+  import { invalidHistory } from '../stores/invalidHistory';
 
   let command = '';
   let historyIndex = -1;
@@ -52,7 +53,10 @@
       } else {
         const output = `${commandName}: command not found`;
 
+        // Add to main history (for display)
         $history = [...$history, { command, outputs: [output] }];
+        // Record in invalid command history
+        $invalidHistory = [...$invalidHistory, command];
       }
 
       command = '';
